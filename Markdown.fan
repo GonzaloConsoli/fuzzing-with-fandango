@@ -1,7 +1,7 @@
 from faker import Faker
 fake = Faker()
 
-<start> ::= "Some random text: \n" <headers> <lorem>
+<start> ::= <headers> <lorem> <reference>
 <text> ::= (<letters> " ") +
 
 <_digit> ::= r'[0-9]'
@@ -19,7 +19,7 @@ fake = Faker()
 include('CrossReferences.fan')
 
 
-<headers> ::= "# "+ <text> := generate_header()
+<headers> ::= "#"+ <printable>+ := generate_header()
 
 
 <header> ::= <text>
@@ -30,3 +30,5 @@ include('CrossReferences.fan')
 <url> ::= <printable>+ := fake.url()
 
 <lorem> ::= <printable>+ := fake.paragraph()
+
+<reference> ::= <printable>+ := generate_reference()
