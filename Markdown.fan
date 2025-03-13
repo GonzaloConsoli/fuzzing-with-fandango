@@ -1,7 +1,7 @@
 from faker import Faker
 fake = Faker()
 
-<start> ::= <header_complete> <lorem> <reference>
+<start> ::= "\n" <header_complete> "\n" <lorem> <reference> <citation> <citation> <citation> "\n"
 <text> ::= (<letters> " ") +
 
 <_digit> ::= r'[0-9]'
@@ -29,3 +29,7 @@ include('CrossReferences.fan')
 <lorem> ::= <printable>+ := fake.paragraph()
 
 <reference> ::= <printable>+ := generate_reference()
+
+<citation> ::= <printable>+ := generate_citation()
+
+#<citate> ::= <printable>+ := citate()
