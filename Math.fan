@@ -1,8 +1,10 @@
 <start> ::= <line_equation>
 
-<line_equation> ::= <equation>{4,10} "\\par \\bigskip"
+<line_equation> ::= "$" (<equation>  <op> ){4,10} <equation> "$" <line_break>
 
-<equation> ::= "$" <expr> "$"
+<line_break> ::= "\\par \\bigskip"
+
+<equation> ::= <expr> 
 
 <expr> ::=
     <basic_expr>
