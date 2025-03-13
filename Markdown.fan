@@ -26,7 +26,7 @@ include('Citation.fan')
 
 <url> ::= <printable>+ := fake.url()
 
-<lorem> ::= <printable>+ := fake.paragraph()
+<lorem> ::= <printable>+ := fake.paragraph(nb_sentences=10 )
 
 <reference> ::= <printable>+ := generate_reference()
 
