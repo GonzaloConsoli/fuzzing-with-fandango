@@ -1,7 +1,9 @@
 from faker import Faker
 fake = Faker()
+include('CrossReferences.fan')
+include('Citation.fan')
 
-<start> ::= "\n" <header_complete> "\n" <lorem> <reference> <citation> <citation> <citation> "\n"
+<start> ::= "\n" <header_complete> "\n" <lorem> <reference> <full_citation> "\n"
 <text> ::= (<letters> " ") +
 
 <_digit> ::= r'[0-9]'
@@ -16,13 +18,11 @@ fake = Faker()
 
 <emphasis> ::= "_" <text> "_" | "*" <text> "*" | "__" <text> "__" | "**" <text> "**" 
 
-include('CrossReferences.fan')
-
 <header_complete> ::= "#"{1,6} <header>
 
 <header> ::= <printable>+ := generate_header()
 
-<links> ::= "[" <text> "]" "(" <url> ") s" 
+<links> ::= "[" <text> "]" "(" <url> ")" 
 
 <url> ::= <printable>+ := fake.url()
 
@@ -30,6 +30,3 @@ include('CrossReferences.fan')
 
 <reference> ::= <printable>+ := generate_reference()
 
-<citation> ::= <printable>+ := generate_citation()
-
-#<citate> ::= <printable>+ := citate()

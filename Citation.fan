@@ -2,22 +2,19 @@ import random
 import re
 from faker import Faker
 fake = Faker()
-HEADERS = []
 
-def generate_header():
-    header_text = fake.sentence(nb_words=3)
-    header = " " + header_text + " \n"
-    HEADERS.append(header)
-    return header
+<start>::= <full_citation>
 
-def generate_reference():
-    random_header = random.choice(HEADERS).strip()
+<full_citation> ::= <citation> <year_citation>".\n"
 
-    lower = random_header.lower()
-    name = lower.replace('#', '').strip()
-    ref = re.sub('[^0-9a-zA-Z.]+', ' ', lower).strip().replace(' ', '-')
+<citation> ::= <printable>+ := generate_citation()
 
-    return "Read [" +name +"](#"+ref +")"
+# We are doing random.randint for the year because this is a lot faster than
+# generating a 4 digit number and then applying the constraint
+<year_citation> ::= <digit>+ := random.randint(1900, 2030)
+
+where int(<year_citation>) > 1950 and int(<year_citation>) < 2025
+
 
 CITATIONS=[]
 
@@ -47,7 +44,3 @@ def generate_citation():
     CITATIONS.append(citation_str)
     
     return "[^" + str(len(CITATIONS)+1) + "].\n\n" +	"[^" + str(len(CITATIONS)+1) + "]: " + citation_str + "\n"
-
-
-
-
