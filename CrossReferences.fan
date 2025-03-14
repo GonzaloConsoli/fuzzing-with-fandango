@@ -1,8 +1,24 @@
 import random
 import re
 from faker import Faker
+from faker.providers import BaseProvider
+
 fake = Faker()
 HEADERS = []
+
+SCIENTIFIC_SECTIONS = ["Abstract","Introduction","Methodology","Results","Discussion","Conclusion","Literature Review","Hypothesis","Experimental Setup","Data Analysis","Validation","Statistical Methods","Ethical Considerations","Limitations","References","Acknowledgments","Appendices"]
+
+class PaperSectionProvider(BaseProvider):
+    def paper_section(self):
+        return random.choice(SCIENTIFIC_SECTIONS)
+
+fake.add_provider(PaperSectionProvider)
+
+def generate_paper_header():
+    header_text = fake.paper_section()
+    header = " " + header_text + " \n"
+    HEADERS.append(header)
+    return header
 
 def generate_header():
     header_text = fake.sentence(nb_words=3)
