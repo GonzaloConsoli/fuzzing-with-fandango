@@ -1,3 +1,7 @@
+# Task 1: Basic Markdown
+# Task 2: Fakers 
+# Task 3: Some Natural Text
+
 from faker import Faker
 fake = Faker()
 include('CrossReferences.fan')

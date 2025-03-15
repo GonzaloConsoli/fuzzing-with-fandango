@@ -1,3 +1,5 @@
+# Task 7: Math
+
 <start> ::= <line_equation>
 
 <line_equation> ::= "$" (<equation>  <op> ){4,10} <equation> "$" <line_break>
