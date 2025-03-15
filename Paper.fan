@@ -5,7 +5,7 @@ include('Markdown.fan')
 
 
 
-<start> ::= "\n" <section>{5}
+<start> ::= <metadata> "\n" <section>{5}
 <section> ::= <main_header> "\n" <P> "\n"
 <main_header> ::= "\n" "# " <paper_header>
 <sub_header> ::= "\n" "#"{2,6} " " <paper_header>
@@ -16,5 +16,9 @@ include('Markdown.fan')
 <paper_header> ::= <printable>+ := generate_paper_header()
 
 
-<title> ::= "# A title"
+<title> ::= <composed_S>
 
+<metadata> ::= "---\ntitle: " <title> "\nauthor:\n" ("- "<author> "\n"){2} "\nabstract: |\n\t" <abstract> "\n...\n"
+
+<author> ::= "Gonzalo Consoli" | "Belen Loleo Saigos"
+<abstract> ::= <small_paragraph>

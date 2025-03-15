@@ -3,8 +3,8 @@ fake = Faker()
 
 <start> ::= <paragraph>
 
-<paragraph> ::= ((<composed_S>){4,10} <S>'. '){5,15}
-
+<paragraph> ::= ((<composed_S>){3,7} <S>'. '){2,7}
+<small_paragraph> ::= ((<composed_S>){1,3} <S>'. '){2,3}
 <composed_S>::= <S> " " <C> " " <S> " "
 
 <S> ::= <NP> " " <VP> 
