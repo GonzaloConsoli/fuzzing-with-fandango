@@ -1,12 +1,15 @@
 all: paper
 
-# If you decide to go with pandoc-citeproc
-#	pandoc -s -F pandoc-crossref -F pandoc-citeproc meta.yaml --data-dir=data-dir --template=mytemplate.tex -N \
-#	-f markdown -t latex+raw_tex+tex_math_dollars+citations -o main.pdf main.md
+.PHONY: main.md
 
-# You can still use pandoc-crossref to easily reference figures with [@fig:label]
+paper: main.md
+	@echo "Generating LaTeX file from Markdown..."
+	@pandoc -s --from=markdown+yaml_metadata_block --to=latex main.md > out.tex
+	@echo "Compiling LaTeX document..."
+	@pdflatex out &> /dev/null
+	@echo "Compilation complete! Check the output."
 
-paper:
-	 @pandoc -s --from=markdown+yaml_metadata_block --to latex main.md > out.tex
-	 @pdflatex out &> /dev/null
-
+main.md:
+	@echo "Generating Markdown with Fandango..."
+	@fandango fuzz -f Paper.fan --population-size 1 -n 1 > main.md
+	@echo "Markdown generation complete!"
