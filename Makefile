@@ -6,7 +6,7 @@ paper: main.md
 	@echo "Generating LaTeX file from Markdown..."
 	@pandoc -s --from=markdown+yaml_metadata_block --to=latex main.md > out.tex
 	@echo "Compiling LaTeX document..."
-	@pdflatex out &> /dev/null
+	@pdflatex -interaction=batchmode out > /dev/null 2>&1
 	@echo "Compilation complete! Check the output."
 
 main.md:

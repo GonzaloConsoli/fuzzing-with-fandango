@@ -25,7 +25,7 @@ include('Markdown.fan')
 # we ran the fuzzer on the individual grammars (for example, fandango did apply the number
 # constraint on the Table.fan).
 
-<start> ::= <metadata> "\n" <section>{5}
+<start> ::= <abstract> "\n" <section>{5}
 <section> ::= <main_header> "\n" <P> "\n"
 <main_header> ::= "\n" "# " <paper_header>
 <sub_header> ::= "\n" "#"{2,6} " " <paper_header>
@@ -37,8 +37,14 @@ include('Markdown.fan')
 
 <title> ::= <composed_S>
 
-<metadata> ::= "---\ntitle: " <title> "\nauthor:\n" ("- "<author> "\n"){2} "\nabstract: |\n\t" <abstract> "\n...\n"
-
 <author> ::= "Gonzalo Consoli" | "Belen Loleo Saigos"
-<abstract> ::= <small_paragraph>
+
+from abstract import generate_random_abstract
+
+<abstract> ::= <printable>+ :=  abstract_wrapper()
+
+def abstract_wrapper():
+    title, abstract = generate_random_abstract()
+    return "---\ntitle: |\n\t " + title + "\nauthor:\n- Belen Loleo Saigos\n- Gonzalo Consoli"+"\nabstract: |\n\t" + abstract + "\n...\n"
+
 
